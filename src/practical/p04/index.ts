@@ -31,10 +31,10 @@ interface UserWithTodos {
 export async function getTodosByUserId(id: number): Promise<UserWithTodos | string> {
   try {
     if (id < 0) return "Invalid id";
-    const usersReq = await axios.get<ApiUser[]>('https://jsonplaceholder.typicode.com/users');
-    const todosReq = await axios.get<Todo[]>('https://jsonplaceholder.typicode.com/todos');
-    const users = usersReq.data;
-    const todos = todosReq.data;
+    const usersRes = await axios.get<ApiUser[]>('https://jsonplaceholder.typicode.com/users');
+    const users = usersRes.data;
+    const todosRes = await axios.get<Todo[]>('https://jsonplaceholder.typicode.com/todos');
+    const todos = todosRes.data;
     const foundUser = users.find((u) => u.id === id);
     if (!foundUser) {
       return "Invalid id";
